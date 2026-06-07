@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import { connectDatabase } from './config/database.js';
 import { apiRouter } from './routes/index.js';
+import { seedDatabase } from './scripts/seedData.js';
 
 dotenv.config();
 
@@ -23,7 +24,12 @@ app.use((error: Error, _req: express.Request, res: express.Response, _next: expr
 });
 
 connectDatabase()
-  .then(() => {
+  .then(async () => {
+    if (process.env.AUTO_SEED === 'true' && process.env.USE_STATIC_DATA !== 'true') {
+      await seedDatabase();
+      console.log('Seed the octofit_db database with test data');
+    }
+
     app.listen(port, () => {
       console.log(`OctoFit Tracker API listening at ${baseUrl}`);
       console.log('Try curl http://localhost:8000/api/users/ or curl http://localhost:8000/api/activities/');

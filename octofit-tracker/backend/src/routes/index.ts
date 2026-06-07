@@ -5,6 +5,7 @@ import { Team } from '../models/Team.js';
 import { User } from '../models/User.js';
 import { Workout } from '../models/Workout.js';
 import { createCollectionRouter } from './createCollectionRouter.js';
+import { sampleData } from '../scripts/seedData.js';
 
 export const apiRouter = Router();
 
@@ -15,8 +16,8 @@ apiRouter.get('/', (_req, res) => {
   });
 });
 
-apiRouter.use('/users', createCollectionRouter(User));
-apiRouter.use('/teams', createCollectionRouter(Team));
-apiRouter.use('/activities', createCollectionRouter(Activity));
-apiRouter.use('/leaderboard', createCollectionRouter(Leaderboard));
-apiRouter.use('/workouts', createCollectionRouter(Workout));
+apiRouter.use('/users', createCollectionRouter(User, sampleData.users));
+apiRouter.use('/teams', createCollectionRouter(Team, sampleData.teams));
+apiRouter.use('/activities', createCollectionRouter(Activity, sampleData.activities));
+apiRouter.use('/leaderboard', createCollectionRouter(Leaderboard, sampleData.leaderboard));
+apiRouter.use('/workouts', createCollectionRouter(Workout, sampleData.workouts));

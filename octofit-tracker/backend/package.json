@@ -6,6 +6,8 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsx watch src/server.ts",
+    "dev:memory": "tsx src/server.memory.ts",
+    "dev:static": "tsx src/server.static.ts",
     "seed": "tsx src/scripts/seed.ts",
     "start": "node dist/server.js"
   },
@@ -13,6 +15,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "mongodb-memory-server": "^10.3.0",
     "mongoose": "^8.9.5"
   },
   "devDependencies": {
